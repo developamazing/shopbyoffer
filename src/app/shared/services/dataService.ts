@@ -24,6 +24,14 @@ export class DataService {
         console.log('getData invoking '+ this.restUrl);
         return this.http.get<T>(this.restUrl);
     }
+
+    public getDataByQueryString<T>(querystring: string)
+    {
+        this.restUrl = this.actionUrl + this.restEntityName + querystring;
+        console.log('getDataByQueryString invoking '+ this.restUrl);
+        return this.http.get<T>(this.restUrl);
+    }
+    
     public getAll<T>(): Observable<T> {
         this.restUrl = this.actionUrl + this.restEntityName + '/all';
         console.log('getAll invoking '+ this.restUrl);

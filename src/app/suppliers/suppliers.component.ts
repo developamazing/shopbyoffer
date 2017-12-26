@@ -1,11 +1,11 @@
 import { Component, OnInit  } from '@angular/core';
 import { DataService } from '../shared/services/dataService';
-import { SuppliersResponse } from './supplier.type';
-import { iSupplier } from './supplier.type';
+import { SuppliersResponse } from '../app.restservice.types';
+import { iSupplier } from '../app.restservice.types';
 
 @Component({
     templateUrl: './suppliers.component.html',
-    styleUrls: ['./suppliers.component.css']
+    styleUrls: ['../app.styles.css']
 })
 export class SupplierComponent implements OnInit {
     public message: string;

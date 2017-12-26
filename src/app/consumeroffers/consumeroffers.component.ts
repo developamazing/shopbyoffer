@@ -1,20 +1,19 @@
 import { Component, OnInit  } from '@angular/core';
 import { DataService } from '../shared/services/dataService';
-import { MarketersResponse } from '../app.restservice.types';
-import { iMarketer } from '../app.restservice.types';
-import {MarketerViewComponent} from './marketer.view';
+import { ConsumerOffersResponse } from '../app.restservice.types';
+import { iConsumerOffer } from '../app.restservice.types';
 
 @Component({
-    templateUrl: './marketers.component.html',
+    templateUrl: './consumeroffers.component.html',
     styleUrls: ['../app.styles.css']
 })
-export class MarketerComponent implements OnInit {
+export class ConsumerOffersComponent implements OnInit {
     public message: string;
-    public allMarketers: any[];
+    public allConsumerOffers: any[];
 
     constructor(
         private _dataService: DataService) {
-        _dataService.restEntityName = "marketer";
+        _dataService.restEntityName = "consumerbidoffer";
         this.message = _dataService.statusMsg;
     }
     
@@ -22,15 +21,15 @@ export class MarketerComponent implements OnInit {
         // this._slimLoadingBarService.start();
         this._dataService
             //.getAll<any[]>()
-            .getData<MarketersResponse>()
-            .subscribe((data: MarketersResponse) => { this.allMarketers = data.resultList; //alert(data.responseMessage);
+            .getDataByQueryString<iConsumerOffer[]>("/adminHandle?markterName=My%20Deals%20Den&marketerType=Online")
+            .subscribe((data: iConsumerOffer[]) => { this.allConsumerOffers = data; //alert(data.responseMessage);
                         },
                         error => () => {
                             alert('error');
                         },
                         () => {
                             // success
-                            // alert("data" + this.allMarketers);
+                            // alert("data:" + this.allConsumerOffers);
                         });
             this.message = this._dataService.statusMsg;
    }

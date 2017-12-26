@@ -1,7 +1,10 @@
 <div class="full">
   <navi-bar></navi-bar>
-  <br height='5px;' />
-  <h2>Suppliers</h2>
+  <h1 class="articleTitle">Suppliers</h1>
+  <div>
+      <span class="articleSubTitle">Supplier Name:</span>
+      <input [(ngModel)]="searchText" placeholder="Enter search text here">
+  </div>
   <table stye="cellpadding:1px; cellspacing:1px;" border="1px" >
     <tr style="background-color: lightblue">
         <th>Supplier Type</th>
@@ -14,7 +17,7 @@
         <th>Updated Date</th>
         <th>Is Active?</th>
     </tr>
-    <tr *ngFor="let value of allSuppliers">
+    <tr *ngFor="let value of allSuppliers | filter : {name: searchText}">
       <td>{{value.suplierType}} </td>
       <td><a href={{value.domain}} target="_blank">{{value.name}}</a> </td>
       <td>{{value.parentSuplierName}} </td>
