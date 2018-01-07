@@ -22,12 +22,16 @@ import { Configuration } from './app.constants';
 
 import { FilterPipe } from './shared/filters/likeFilter.pipe';
 
+import {Ng2PaginationModule} from 'ng2-pagination';
+import { DataTableModule } from "ng2-data-table";
 @NgModule({
+    
+
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        FormsModule
+        FormsModule, Ng2PaginationModule,DataTableModule
     ],
     declarations: [
         AppComponent,

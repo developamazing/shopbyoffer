@@ -1,7 +1,8 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import { DataService } from '../shared/services/dataService';
 import { ConsumerOffersResponse } from '../app.restservice.types';
 import { iConsumerOffer } from '../app.restservice.types';
+
 
 @Component({
     templateUrl: './consumeroffers.component.html',
@@ -33,4 +34,6 @@ export class ConsumerOffersComponent implements OnInit {
                         });
             this.message = this._dataService.statusMsg;
    }
+
+
 }
