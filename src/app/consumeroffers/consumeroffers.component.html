@@ -2,10 +2,28 @@
   <navi-bar></navi-bar>
 
   <h1 class="articleTitle">Consumer Offers</h1>
-  <div>
-      <span class="articleSubTitle">Consumer Name:</span>
-      <input [(ngModel)]="searchText" placeholder="Enter search text here">
-  </div>
+  <table height="25px" class="test">
+    <tr height="25px">
+      <td width="15%">
+        <span class="articleSubTitle">Consumer Name:</span>
+      </td>
+      <td width="10%">
+        <input [(ngModel)]="searchText" placeholder="Enter search text here">
+      </td>
+      <td width="60%" align=right>
+        <span class="articleSubTitle">Number of records:</span>
+      </td>
+      <td>
+        <select [(ngModel)]="selectedValue" item-width="10">
+          <option value="5">5</option>
+          <option value="10" [selected]="25">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </td>
+    </tr>
+  </table>
   <table stye="cellpadding:1px; cellspacing:1px;" border="1px" >
     <tr style="background-color: lightblue">
         <th>Consumer Name</th>
@@ -15,9 +33,7 @@
         <th>Offer Date</th>
         <th>Status</th>
     </tr>
-    <tr *ngFor="let value of allConsumerOffers | filter : {coconsumerKeyId: searchText} | paginate: {itemsPerPage: 5, currentPage:page, id: '1'}; let i = index">
-      <td>{{i + 1}}</td>
-
+    <tr *ngFor="let value of allConsumerOffers | filter : {coconsumerKeyId: searchText} | paginate: {itemsPerPage: selectedValue, currentPage:page, id: '1'}; let i = index">
       <td>{{value.coconsumerKeyId.handle}}</td>
       <td>{{value.compkeyId.mpproductKeyId.name}}</td>
       <td align='right'>{{value.quantity}} </td>
@@ -29,13 +45,7 @@
   </table>
 
   <pagination-controls (pageChange)="page = $event" id="1"
-  maxSize="5"
-  pages = "{10,20}"
-  directionLinks="true"
-  autoHide="true">
+      maxSize="10" pages = "{10,20}" directionLinks="true" autoHide="true">
   </pagination-controls>
- 
-  <footer></footer>
- 
 </div>
 
