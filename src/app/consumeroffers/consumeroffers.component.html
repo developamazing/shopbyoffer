@@ -4,22 +4,17 @@
   <h1 class="articleTitle">Consumer Offers</h1>
   <table height="25px" class="test">
     <tr height="25px">
-      <td width="15%">
+      <td >
         <span class="articleSubTitle">Consumer Name:</span>
-      </td>
-      <td width="10%">
         <input [(ngModel)]="searchText" placeholder="Enter search text here">
       </td>
-      <td width="60%" align=right>
-        <span class="articleSubTitle">Number of records:</span>
-      </td>
-      <td>
-        <select [(ngModel)]="selectedValue" item-width="10">
-          <option value="5">5</option>
-          <option value="10" [selected]="25">10</option>
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
+      <td width="200px">
+        <select [(ngModel)]="selectedValue">
+          <option value="5">5 per page</option>
+          <option value="10">10 per page</option>
+          <option value="25">25 per page</option>
+          <option value="50">50 per page</option>
+          <option value="100">100 per page</option>
         </select>
       </td>
     </tr>
