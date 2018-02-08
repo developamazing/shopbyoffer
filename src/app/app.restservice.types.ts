@@ -19,6 +19,45 @@ export interface ConsumerOffersResponse {
   responseMessage: string; 
 }
 
+export interface OfferBundlesResponse {
+  resultList: iOfferBundle[];
+  paginator: string;
+  responseCode: number;
+  responseMessage: string; 
+}
+
+export interface ConsumerOfferBundleResponse {
+  resultList: iConsumerOfferBundles[];
+  paginator: string;
+  responseCode: number;
+  responseMessage: string; 
+}
+
+export interface iConsumerOfferBundles {
+  consumerOfferBundleList: iConsumerOfferBundle[];
+  consumerOfferList: iConsumerOffer[];
+  offerBundle: iOfferBundle;
+}
+// http://dev.ushopper.net/offerprocessing/executeOfferRules
+
+export interface iOfferBundle {
+  id: string;
+  productSKU: string; 
+  active: boolean;
+  bundleStatusKey: iBundleStatus;
+}
+export interface iBundleStatus {
+  description: string;
+  id: string;
+  status: string;
+}
+export interface iConsumerOfferBundle {
+  id: string;
+  cobcokeyId: iConsumerOffer;
+  obidKey: iOfferBundle; 
+  isActive: boolean;
+}
+
 export interface iMarketer {
   id: string;
   domain: string;

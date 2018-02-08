@@ -5,6 +5,7 @@ import { HomeComponent } from '../home/home.component';
 import { MarketerComponent } from '../marketers/marketers.component';
 import { SupplierComponent } from '../suppliers/suppliers.component';
 import { ConsumerOffersComponent } from '../consumeroffers/consumeroffers.component';
+import { ConsumerOfferBundlesComponent } from '../consumerofferbundles/consumerofferbundles.component';
 import { ErrorComponent } from '../error/error.component';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ErrorComponent } from '../error/error.component';
             { path: 'Marketers' , component: MarketerComponent},  
             { path: 'Suppliers' , component: SupplierComponent},  
             { path: 'ConsumerOffers' , component: ConsumerOffersComponent},  
+            { path: 'OfferBundles' , component: ConsumerOfferBundlesComponent},  
             { path: '**' , component: ErrorComponent }
         ])
     ],

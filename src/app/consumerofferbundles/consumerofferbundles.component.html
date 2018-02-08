@@ -1,0 +1,70 @@
+<div class="full">
+  <navi-bar></navi-bar>
+  <h1 class="articleTitle">Offer Bundles</h1>
+<table height="25px" class="test">
+  <tr height="25px">
+    <td >
+        <button (click)="ApplyRules()" class="button">Apply Rules</button>
+<strong>
+  {{rulesResults}}
+</strong>
+
+      <span class="articleSubTitle">SKU:</span>
+      <input [(ngModel)]="searchText" placeholder="Enter search text here">
+    </td>
+    <td width="200px">
+      <select [(ngModel)]="selectedValue">
+        <option value="5">5 per page</option>
+        <option value="10">10 per page</option>
+        <option value="25">25 per page</option>
+        <option value="50">50 per page</option>
+        <option value="100">100 per page</option>
+      </select>
+    </td>
+  </tr>
+</table>
+      
+  <table stye="cellpadding:1px; cellspacing:1px;" border="1px" >
+    <tr style="background-color: lightblue">
+        <th>Product SKU</th>
+        <th>Status</th>
+        <th>Consumer Offers</th>
+    </tr>
+    <tr *ngFor="let value of allConsumerOfferBundles | filter :  {  productSKU: searchText} | paginate: {itemsPerPage: selectedValue, currentPage:page, id: '1'}; let i = index">
+      <td>{{value.offerBundle.productSKU}}</td>
+      <td [style.color]="value.offerBundle.bundleStatusKey.status === 'Accepted' ? 'darkorange' : 'blue'">
+        
+        {{value.offerBundle.bundleStatusKey.status}} </td>
+      <td>
+          <table stye="cellpadding:1px; cellspacing:1px;" border="1px;" border-color="blue"  >
+              <tr style="background-color: lightgrey">
+                  <th>Consumer Name</th>
+                  <th>Product Name</th>
+                  <th>Quantity</th>
+                  <th>Product Price</th>
+                  <th>Offer Price</th>
+                  <th>Offer Date</th>
+                  <th>Status</th>
+              </tr>
+          <tr *ngFor="let co of value.consumerOfferList">
+                  <td>{{co.coconsumerKeyId.handle}}</td>
+                  <td>{{co.compkeyId.mpproductKeyId.name}}</td>
+                  <td align='right'>{{co.quantity}} </td>
+                  
+      <td align='right'>${{co.compkeyId.price| number:'1.2-5'}}</td>
+                  <td align='right'
+                  [style.color]="co.compkeyId.price <= co.maxPrice ? 'red' : 'black'"
+                  >${{co.maxPrice | number:'1.2-5' }}</td>
+                  <td [style.color]="co.offerredDate <= today ? 'red' : 'black'">
+                  {{co.offerredDate | date:'MM/dd/yyyy'}} </td>
+                  <td [style.color]="co.coofferStatusKeyId.status === 'Approved' ? 'darkorange' : 'blue'">
+                  {{co.coofferStatusKeyId.status}} </td>
+            </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <pagination-controls (pageChange)="page = $event" id="1"
+  maxSize="10" pages = "{10,20}" directionLinks="true" autoHide="true">
+</pagination-controls>
+</div>
