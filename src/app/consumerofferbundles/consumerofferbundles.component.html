@@ -13,27 +13,38 @@
       <input [(ngModel)]="searchText" placeholder="Enter search text here">
     </td>
     <td width="200px">
-      <select [(ngModel)]="selectedValue">
-        <option value="5">5 per page</option>
-        <option value="10">10 per page</option>
-        <option value="25">25 per page</option>
-        <option value="50">50 per page</option>
-        <option value="100">100 per page</option>
-      </select>
-    </td>
+        <select [(ngModel)]="selectedStatus">
+          <option value="All">All</option>
+          <option value="Working">Working</option>
+          <option value="Full">Full</option>            
+          <option value="Accepted">Accepted</option>
+          <option value="Expired">Expired</option>
+          <option value="Rejected">Rejected</option>
+          <option value="Canceled">Canceled</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </td>
+      <td width="200px">
+        <select [(ngModel)]="pageSizeValue">
+          <option value="5">5 per page</option>
+          <option value="10">10 per page</option>
+          <option value="25">25 per page</option>
+          <option value="50">50 per page</option>
+          <option value="100">100 per page</option>
+        </select>
+      </td>
   </tr>
 </table>
-      
   <table stye="cellpadding:1px; cellspacing:1px;" border="1px" >
     <tr style="background-color: lightblue">
         <th>Product SKU</th>
         <th>Status</th>
         <th>Consumer Offers</th>
     </tr>
-    <tr *ngFor="let value of allConsumerOfferBundles | filter :  {  productSKU: searchText} | paginate: {itemsPerPage: selectedValue, currentPage:page, id: '1'}; let i = index">
+    <tr *ngFor="let value of allConsumerOfferBundles | filter :  {  productSKU: searchText}
+          | paginate: {itemsPerPage: pageSizeValue, currentPage:page, id: '1'}; let i = index">
       <td>{{value.offerBundle.productSKU}}</td>
-      <td [style.color]="value.offerBundle.bundleStatusKey.status === 'Accepted' ? 'darkorange' : 'blue'">
-        
+      <td [style.color]="value.offerBundle.bundleStatusKey.status === 'Accepted' ? 'darkorange' : 'blue'">        
         {{value.offerBundle.bundleStatusKey.status}} </td>
       <td>
           <table stye="cellpadding:1px; cellspacing:1px;" border="1px;" border-color="blue"  >
@@ -50,8 +61,7 @@
                   <td>{{co.coconsumerKeyId.handle}}</td>
                   <td>{{co.compkeyId.mpproductKeyId.name}}</td>
                   <td align='right'>{{co.quantity}} </td>
-                  
-      <td align='right'>${{co.compkeyId.price| number:'1.2-5'}}</td>
+                  <td align='right'>${{co.compkeyId.price| number:'1.2-5'}}</td>
                   <td align='right'
                   [style.color]="co.compkeyId.price <= co.maxPrice ? 'red' : 'black'"
                   >${{co.maxPrice | number:'1.2-5' }}</td>

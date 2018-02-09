@@ -12,12 +12,15 @@ export class ConsumerOfferBundlesComponent implements OnInit {
     public allConsumerOfferBundles: any[];
     public rulesResults: string;
     public today: number = Date.now();
+    public selectedStatus: string;
+    public pageSizeValue: any;
 
     constructor(
         private _dataService: DataService) {
         _dataService.restEntityName = "consumerOfferBundle";
         this.message = _dataService.statusMsg;
-        
+        this.selectedStatus = "All"; 
+        this.pageSizeValue =10;
     }
 
     ApplyRules()
@@ -40,7 +43,8 @@ export class ConsumerOfferBundlesComponent implements OnInit {
         this._dataService
             //.getAll<any[]>()
             .getDataByQueryString<iConsumerOfferBundles[]>("/all")
-            .subscribe((data: iConsumerOfferBundles[]) => { this.allConsumerOfferBundles = data; //alert(data.responseMessage);
+            .subscribe((data: iConsumerOfferBundles[]) => { 
+                            this.allConsumerOfferBundles = data; //alert(data.responseMessage);
                         },
                         error => () => {
                             alert('error');

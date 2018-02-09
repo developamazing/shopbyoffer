@@ -25,6 +25,20 @@ export class DataService {
         return this.http.get<T>(this.restUrl);
     }
 
+    public get(querystring: string)
+    {
+        this.restUrl = this.actionUrl + querystring;
+        console.log('get invoking url:'+ this.restUrl);
+        return this.http.get(this.restUrl);
+    }
+
+    public post(querystring: string)
+    {
+        this.restUrl = this.actionUrl + querystring;
+        console.log('post invoking url:'+ this.restUrl);
+        return this.http.post(this.restUrl, "");
+    }
+
     public getDataByQueryString<T>(querystring: string)
     {
         this.restUrl = this.actionUrl + this.restEntityName + querystring;
