@@ -1,3 +1,12 @@
+// http://dev.ushopper.net/offerprocessing/executeOfferRules
+
+export interface BundleOfferMappingsResponse {
+  resultList: iBundleOfferMapping[];
+  paginator: string;
+  responseCode: number;
+  responseMessage: string; 
+}
+
 export interface MarketersResponse {
   resultList: iMarketer[];
   paginator: string;
@@ -38,19 +47,14 @@ export interface iConsumerOfferBundles {
   consumerOfferList: iConsumerOffer[];
   offerBundle: iOfferBundle;
 }
-// http://dev.ushopper.net/offerprocessing/executeOfferRules
 
 export interface iOfferBundle {
   id: string;
   productSKU: string; 
   active: boolean;
-  bundleStatusKey: iBundleStatus;
+  bundleStatusKey: iStatus;
 }
-export interface iBundleStatus {
-  description: string;
-  id: string;
-  status: string;
-}
+
 export interface iConsumerOfferBundle {
   id: string;
   cobcokeyId: iConsumerOffer;
@@ -87,7 +91,7 @@ export interface iProduct {
     isActive: boolean;
 }
 
-export interface iOfferStatus {
+export interface iStatus {
     id: number;
     status: string;
     description: string;
@@ -122,7 +126,7 @@ export interface iConsumerOffer {
   current:boolean;
   coconsumerKeyId:iConsumer;
   compkeyId:iMarketerProduct;
-  coofferStatusKeyId: iOfferStatus;
+  coofferStatusKeyId: iStatus;
 }
 
 export interface iConsumer {
@@ -152,6 +156,45 @@ export interface iMarketerProduct{
     updatedDate: string;
     isActive: boolean;
     mpmarketerKeyId:iMarketer;
-    mpproductKeyId: iProduct;
-    
+    mpproductKeyId: iProduct;    
+}
+
+export interface iBundleOfferMapping {
+  id: number;
+  bomstatusTypeId: iStatus;
+  cobidkey: iOfferBundle;
+  soidkey: iSupplierOffer;
+}
+
+export interface iSupplierOffer {
+  id: number;
+  offerSupplierProductKeyId: iSupplierProduct;
+  minQuantity: number;
+  maxQuantity: number;
+  offerPrice: number;
+  effectiveDate: string;
+  endDate: string;
+  ranking: number;
+  createdBy: string;
+  createdTime?: null;
+  updatedBy: string;
+  updatedDate: string;
+  active: boolean;
+  sofferStatusKeyId: iStatus;
+}
+
+export interface iSupplierProduct {
+  id: number;
+  price: number;
+  currency: string;
+  sku: string;
+  createdBy: string;
+  createdDate: string;
+  updatedBy: string;
+  updatedDate: string;
+  isActive: boolean;
+  offerBucketSize: number;
+  productId: iProduct;
+  supplierId: iSupplier;
+  priority: number;
 }

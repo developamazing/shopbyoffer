@@ -35,22 +35,23 @@
       </td>
   </tr>
 </table>
-  <table stye="cellpadding:1px; cellspacing:1px;" border="1px" >
+  <table stye="cellpadding:0px; cellspacing:0px;" border="1px" >
     <tr style="background-color: lightblue">
-        <th>Product SKU</th>
-        <th>Status</th>
+        <th width="35%">Product</th>
+        <th width="5%">Status</th>
         <th>Consumer Offers</th>
     </tr>
     <tr *ngFor="let value of allConsumerOfferBundles | filter :  {  productSKU: searchText}
           | paginate: {itemsPerPage: pageSizeValue, currentPage:page, id: '1'}; let i = index">
-      <td>{{value.offerBundle.productSKU}}</td>
-      <td [style.color]="value.offerBundle.bundleStatusKey.status === 'Accepted' ? 'darkorange' : 'blue'">        
+      <td valign="top">
+        {{value.consumerOfferList[0].compkeyId.mpproductKeyId.name}}
+      </td>
+      <td valign="top" [style.color]="value.offerBundle.bundleStatusKey.status === 'Accepted' ? 'darkorange' : 'blue'">        
         {{value.offerBundle.bundleStatusKey.status}} </td>
-      <td>
+      <td valign="top">
           <table stye="cellpadding:1px; cellspacing:1px;" border="1px;" border-color="blue"  >
               <tr style="background-color: lightgrey">
                   <th>Consumer Name</th>
-                  <th>Product Name</th>
                   <th>Quantity</th>
                   <th>Product Price</th>
                   <th>Offer Price</th>
@@ -59,7 +60,6 @@
               </tr>
           <tr *ngFor="let co of value.consumerOfferList">
                   <td>{{co.coconsumerKeyId.handle}}</td>
-                  <td>{{co.compkeyId.mpproductKeyId.name}}</td>
                   <td align='right'>{{co.quantity}} </td>
                   <td align='right'>${{co.compkeyId.price| number:'1.2-5'}}</td>
                   <td align='right'

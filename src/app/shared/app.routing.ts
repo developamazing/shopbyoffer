@@ -6,6 +6,8 @@ import { MarketerComponent } from '../marketers/marketers.component';
 import { SupplierComponent } from '../suppliers/suppliers.component';
 import { ConsumerOffersComponent } from '../consumeroffers/consumeroffers.component';
 import { ConsumerOfferBundlesComponent } from '../consumerofferbundles/consumerofferbundles.component';
+import { BundleOfferMappingsComponent } from '../bundleoffermappings/bundleoffermappings.component';
+
 import { ErrorComponent } from '../error/error.component';
 
 @NgModule({
@@ -16,7 +18,8 @@ import { ErrorComponent } from '../error/error.component';
             { path: 'Marketers' , component: MarketerComponent},  
             { path: 'Suppliers' , component: SupplierComponent},  
             { path: 'ConsumerOffers' , component: ConsumerOffersComponent},  
-            { path: 'OfferBundles' , component: ConsumerOfferBundlesComponent},  
+            { path: 'OfferBundles' , component: ConsumerOfferBundlesComponent}, 
+            { path: 'MatchedOffers' , component: BundleOfferMappingsComponent}, 
             { path: '**' , component: ErrorComponent }
         ])
     ],

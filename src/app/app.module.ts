@@ -13,6 +13,8 @@ import { MarketerViewComponent } from './marketers/marketer.view';
 import { SupplierComponent } from './suppliers/suppliers.component';
 import { ConsumerOffersComponent } from './consumeroffers/consumeroffers.component';
 import { ConsumerOfferBundlesComponent } from './consumerofferbundles/consumerofferbundles.component';
+import { BundleOfferMappingsComponent } from './bundleoffermappings/bundleoffermappings.component';
+
 
 import { ErrorComponent } from './error/error.component';
 import { FooterComponent } from './shared/footer.component';
@@ -43,6 +45,7 @@ import { DataTableModule } from "ng2-data-table";
         SupplierComponent,
         ConsumerOffersComponent,
         ConsumerOfferBundlesComponent,
+        BundleOfferMappingsComponent,
         FooterComponent,
         ErrorComponent,
         FilterPipe,
