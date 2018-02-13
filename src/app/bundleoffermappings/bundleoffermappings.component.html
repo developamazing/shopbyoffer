@@ -1,94 +1,116 @@
 <div class="full">
   <navi-bar></navi-bar>
   <h1 class="articleTitle">Matched Offers</h1>
-<table height="25px" class="test">
-  <tr height="25px">
-    <td>
-      <span class="articleSubTitle">SKU:</span>
-      <input [(ngModel)]="searchText" placeholder="Enter search text here">
-    </td>
-    <td width="200px">
-        <select [(ngModel)]="selectedStatus">
-          <option value="All">All</option>
-          <option value="Working">Working</option>
-          <option value="Full">Full</option>            
-          <option value="Accepted">Accepted</option>
-          <option value="Expired">Expired</option>
-          <option value="Rejected">Rejected</option>
-          <option value="Canceled">Canceled</option>
-          <option value="Completed">Completed</option>
-        </select>
+  <table height="25px" class="test">
+    <tr height="25px">
+      <td>
+        <span class="articleSubTitle">SKU:</span>
+        <input [(ngModel)]="searchText" placeholder="Enter search text here">
       </td>
       <td width="200px">
-        <select [(ngModel)]="pageSizeValue">
-          <option value="5">5 per page</option>
-          <option value="10">10 per page</option>
-          <option value="25">25 per page</option>
-          <option value="50">50 per page</option>
-          <option value="100">100 per page</option>
-        </select>
-      </td>
-  </tr>
-</table>
+          <select [(ngModel)]="selectedStatus">
+            <option value="All">All</option>
+            <option value="Working">Working</option>
+            <option value="Full">Full</option>            
+            <option value="Accepted">Accepted</option>
+            <option value="Expired">Expired</option>
+            <option value="Rejected">Rejected</option>
+            <option value="Canceled">Canceled</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </td>
+        <td width="200px">
+          <select [(ngModel)]="pageSizeValue">
+            <option value="5">5 per page</option>
+            <option value="10">10 per page</option>
+            <option value="25">25 per page</option>
+            <option value="50">50 per page</option>
+            <option value="100">100 per page</option>
+          </select>
+        </td>
+    </tr>
+  </table>
   <table stye="cellpadding:0px; cellspacing:0px;" border="1px" >
     <tr style="background-color: lightblue">
-        <th width="35%">Supplier Offer</th>
+        <th width="32%">Supplier Offer</th>
         <th width="5%">Status</th>
-        <th>Consumer Offer Bundles</th>
+        <th>Consumer Offers</th>
     </tr>
     <tr *ngFor="let value of allBundleOfferMappings | filter :  {  productSKU: searchText}
-          | paginate: {itemsPerPage: pageSizeValue, currentPage:page, id: '1'}; let i = index">
+          | paginate: {itemsPerPage: pageSizeValue, currentPage:page, id: '1'}; let i = index"
+          valign="top">
+      <td valign="top">
+          <table stye="cellpadding:1px; cellspacing:1px;" border="1px;" border-color="blue"  >
+            <tr>
+              <td>Name</td>
+              <td>{{value.soidkey.offerSupplierProductKeyId.supplierId.name}}</td>
+            </tr>
+            <tr style="background-color: lightgrey">
+              <td width="130px">Product Name</td>
+              <td>{{value.soidkey.offerSupplierProductKeyId.productId.name}}</td>
+            </tr>
+            <tr>
+              <td>SKU</td>
+              <td>{{value.soidkey.offerSupplierProductKeyId.sku}}</td>
+            </tr>
+            <tr style="background-color: lightgrey">
+              <td>Min. Qty</td>
+              <td>{{value.soidkey.minQuantity}} </td>
+            </tr>
+            <tr>
+              <td>Max. Qty</td>
+              <td >{{value.soidkey.maxQuantity}} </td>
+            </tr>
+            <tr style="background-color: lightgrey">
+              <td>Offer Price</td>
+              <td >${{value.soidkey.offerPrice| number:'1.2-5'}}</td>
+            </tr>
+            <tr>
+              <td>Product Price</td>
+              <td [style.color]="value.soidkey.offerSupplierProductKeyId.price <= value.soidkey.offerPrice ? 'red' : 'black'">
+                      ${{value.soidkey.offerSupplierProductKeyId.price | number:'1.2-5' }}</td>
+            </tr>
+            <tr style="background-color: lightgrey">
+              <td>Start Date</td>
+              <td [style.color]="value.soidkey.effectiveDate <= today ? 'red' : 'black'">
+                    {{value.soidkey.effectiveDate | date:'MM/dd/yyyy'}} </td>
+            </tr>
+            <tr>
+              <td>End Date</td>
+              <td [style.color]="value.soidkey.endDate <= today ? 'red' : 'black'">
+                        {{value.soidkey.endDate | date:'MM/dd/yyyy'}} </td>
+            </tr>
+          </table>
+      </td>
+      <td [style.color]="value.bomstatusTypeId.status === 'Accepted' ? '#19CE2E' : 'blue'">        
+            <b>{{value.bomstatusTypeId.status}} </b>
+      </td>
       <td>
           <table stye="cellpadding:1px; cellspacing:1px;" border="1px;" border-color="blue"  >
-              <tr>
-                  <td>Name</td>
-                  <td>{{value.soidkey.offerSupplierProductKeyId.supplierId.name}}</td>
-                </tr>
-              <tr style="background-color: lightgrey">
-                  <td width="150px">Product Name</td>
-                  <td>{{value.soidkey.offerSupplierProductKeyId.productId.name}}</td>
-                </tr>
-                <tr>
-                  <td>SKU</td>
-                  <td>{{value.soidkey.offerSupplierProductKeyId.sku}}</td>
-                </tr>
-                <tr style="background-color: lightgrey">
-                  <td>Min. Qty</td>
-                  <td>{{value.soidkey.minQuantity}} </td>
-                </tr>
-                <tr>
-                      <td>Max. Qty</td>
-                      <td >{{value.soidkey.maxQuantity}} </td>
-                    </tr>
-                    <tr style="background-color: lightgrey">
-                      <td>Offer Price</td>
-                      <td >${{value.soidkey.offerPrice| number:'1.2-5'}}</td>
-                    </tr>
-                    <tr>
-                          <td>Product Price</td>
-                          <td [style.color]="value.soidkey.offerSupplierProductKeyId.price <= value.soidkey.offerPrice ? 'red' : 'black'">
-                            ${{value.soidkey.offerSupplierProductKeyId.price | number:'1.2-5' }}</td>
-                          </tr>
-                          <tr style="background-color: lightgrey">
-                      <td>Start Date</td>
-                      <td [style.color]="value.soidkey.effectiveDate <= today ? 'red' : 'black'">
-                          {{value.soidkey.effectiveDate | date:'MM/dd/yyyy'}} </td>
-                        </tr>
-                        <tr>
-                          <td>End Date</td>
-                          <td [style.color]="value.soidkey.endDate <= today ? 'red' : 'black'">
-                              {{value.soidkey.endDate | date:'MM/dd/yyyy'}} </td>
-                      </tr>
-                    </table>
-      </td>
-      <td [style.color]="value.bomstatusTypeId.status === 'Accepted' ? 'darkorange' : 'blue'">        
-          {{value.bomstatusTypeId.status}} </td>
-        <td>
-
+            <tr style="background-color: lightgrey">
+              <th item-width="28%">Consumer Name</th>
+              <th item-width="7%">Quantity</th>
+              <th item-width="12%">Offer Price</th>
+              <th item-width="17%">Offer Date</th>
+              <th item-width="17%">End Date</th>
+              <th item-width="19%">Status</th>
+            </tr>
+            <tr *ngFor="let co of value.cobidkey.consumerOfferList">
+              <td>{{co.coconsumerKeyId.handle}}</td>
+              <td align='right'>{{co.quantity}} </td>
+              <td align='right' [style.color]="co.compkeyId.price <= co.maxPrice ? 'red' : 'black'">
+                ${{co.maxPrice | number:'1.2-5' }}</td>
+              <td>{{co.offerredDate | date:'MM/dd/yyyy'}} </td>
+              <td [style.color]="co.endDate <= today ? 'red' : 'black'">
+                {{co.endDate | date:'MM/dd/yyyy'}} </td>
+              <td [style.color]="co.coofferStatusKeyId.status === 'Approved' ? '#19CE2E' : 'blue'">
+                {{co.coofferStatusKeyId.status}} </td>
+            </tr>
+          </table>
       </td>
     </tr>
   </table>
   <pagination-controls (pageChange)="page = $event" id="1"
-  maxSize="10" pages = "{10,20}" directionLinks="true" autoHide="true">
-</pagination-controls>
+      maxSize="10" pages = "{10,20}" directionLinks="true" autoHide="true">
+  </pagination-controls>
 </div>

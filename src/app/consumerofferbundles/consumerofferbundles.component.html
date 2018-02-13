@@ -37,38 +37,40 @@
 </table>
   <table stye="cellpadding:0px; cellspacing:0px;" border="1px" >
     <tr style="background-color: lightblue">
-        <th width="35%">Product</th>
+        <th width="30%">Product Name</th>
         <th width="5%">Status</th>
         <th>Consumer Offers</th>
     </tr>
     <tr *ngFor="let value of allConsumerOfferBundles | filter :  {  productSKU: searchText}
-          | paginate: {itemsPerPage: pageSizeValue, currentPage:page, id: '1'}; let i = index">
+          | paginate: {itemsPerPage: pageSizeValue, currentPage:page, id: '1'}; let i = index"
+          valign="top">
       <td valign="top">
         {{value.consumerOfferList[0].compkeyId.mpproductKeyId.name}}
       </td>
-      <td valign="top" [style.color]="value.offerBundle.bundleStatusKey.status === 'Accepted' ? 'darkorange' : 'blue'">        
+      <td valign="top" [style.color]="value.offerBundle.bundleStatusKey.status === 'Accepted' ? '#19CE2E' : 'blue'">        
         {{value.offerBundle.bundleStatusKey.status}} </td>
       <td valign="top">
-          <table stye="cellpadding:1px; cellspacing:1px;" border="1px;" border-color="blue"  >
+          <table stye="cellpadding:0px; cellspacing:0px;" border="1px;" border-color="blue"  >
               <tr style="background-color: lightgrey">
-                  <th>Consumer Name</th>
-                  <th>Quantity</th>
-                  <th>Product Price</th>
-                  <th>Offer Price</th>
-                  <th>Offer Date</th>
-                  <th>Status</th>
+                  <th item-width="25%">Consumer Name</th>
+                  <th item-width="8%">Quantity</th>
+                  <th item-width="12%">Product Price</th>
+                  <th item-width="10%">Offer Price</th>
+                  <th item-width="15%">Offer Date</th>
+                  <th item-width="15%">End Date</th>
+                  <th item-width="15%">Status</th>    
               </tr>
           <tr *ngFor="let co of value.consumerOfferList">
                   <td>{{co.coconsumerKeyId.handle}}</td>
                   <td align='right'>{{co.quantity}} </td>
                   <td align='right'>${{co.compkeyId.price| number:'1.2-5'}}</td>
-                  <td align='right'
-                  [style.color]="co.compkeyId.price <= co.maxPrice ? 'red' : 'black'"
-                  >${{co.maxPrice | number:'1.2-5' }}</td>
-                  <td [style.color]="co.offerredDate <= today ? 'red' : 'black'">
-                  {{co.offerredDate | date:'MM/dd/yyyy'}} </td>
-                  <td [style.color]="co.coofferStatusKeyId.status === 'Approved' ? 'darkorange' : 'blue'">
-                  {{co.coofferStatusKeyId.status}} </td>
+                  <td align='right' [style.color]="co.compkeyId.price <= co.maxPrice ? 'red' : 'black'">
+                    ${{co.maxPrice | number:'1.2-5' }}</td>
+                  <td>{{co.offerredDate | date:'MM/dd/yyyy'}} </td>
+                  <td [style.color]="co.endDate <= today ? 'red' : 'black'">
+                    {{co.endDate | date:'MM/dd/yyyy'}} </td>
+                  <td [style.color]="co.coofferStatusKeyId.status === 'Approved' ? '#19CE2E' : 'blue'">
+                    {{co.coofferStatusKeyId.status}} </td>
             </tr>
         </table>
       </td>
